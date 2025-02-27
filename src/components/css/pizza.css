@@ -1,0 +1,134 @@
+/* App.css */
+
+/* General styling for the app */
+.app {
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Header styling */
+  .header {
+    background-color: #ff6f61;
+    padding: 20px 0;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  .pizza-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+  }
+  
+  .header-title {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  /* Menu Grid styling */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 30px;
+  }
+  
+  .menu-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .menu-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .menu-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .menu-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .menu-content {
+    padding: 20px;
+  }
+  
+  .menu-title {
+    font-size: 1.6rem;
+    margin: 0 0 10px;
+  }
+  
+  .menu-description {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .menu-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .menu-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff6f61;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .cart-button,
+  .order-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cart-button {
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .cart-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .order-button {
+    background-color: #ff6f61;
+    color: white;
+  }
+  
+  .order-button:hover {
+    background-color: #e74a3b;
+  }
+  
+  /* Footer styling */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
