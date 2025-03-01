@@ -109,6 +109,7 @@ function App() {
                   <Star className="mb-3" size={32} />
                   <h5 className="card-title">Quality Food</h5>
                   <p className="card-text">We serve only the highest quality ingredients in our dishes.</p>
+                  <Link to="/about" className="btn btn-primary">Read More</Link>
                 </div>
               </div>
             </div>
@@ -118,6 +119,7 @@ function App() {
                   <Clock className="mb-3" size={32} />
                   <h5 className="card-title">Fast Delivery</h5>
                   <p className="card-text">Quick delivery to your doorstep, hot and fresh.</p>
+                  <Link to="/about" className="btn btn-primary">Read More</Link>
                 </div>
               </div>
             </div>
@@ -127,6 +129,7 @@ function App() {
                   <Truck className="mb-3" size={32} />
                   <h5 className="card-title">Free Shipping</h5>
                   <p className="card-text">Free delivery on orders above $50 in your area.</p>
+                  <Link to="/about" className="btn btn-primary">Read More</Link>
                 </div>
               </div>
             </div>
@@ -136,6 +139,7 @@ function App() {
                   <ChefHat className="mb-3" size={32} />
                   <h5 className="card-title">Expert Chefs</h5>
                   <p className="card-text">Our dishes are prepared by experienced chefs.</p>
+                  <Link to="/about" className="btn btn-primary">Read More</Link>
                 </div>
               </div>
             </div>

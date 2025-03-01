@@ -76,7 +76,7 @@ function About() {
             </div>
             <div className="col-md-6">
               <p>
-                Enjoy the convenience of free delivery on all orders above $50. We ensure that your food arrives hot and fresh, right at your doorstep.
+                Enjoy the convenience of free delivery on all orders . We ensure that your food arrives hot and fresh, right at your doorstep.
               </p>
             </div>
           </div>

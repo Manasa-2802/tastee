@@ -1,4 +1,3 @@
-// Cart.js
 import React from 'react';
 import { useCart } from './CartContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -19,7 +18,12 @@ const Cart = () => {
     <div className="container mt-5">
       <h1 className="mb-4">Cart</h1>
       {cartItems.length === 0 ? (
-        <p className="text-center">Your cart is empty.</p>
+        <div className="text-center">
+          <p>Your cart is empty.</p>
+          <Link to="/menu1" className="btn btn-primary">
+            Back to Menu
+          </Link>
+        </div>
       ) : (
         <div>
           <table className="table table-striped">

@@ -7,7 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const menuData = [
   { id: 1, name: 'Corn Pizza', price: 'Rs. 180', image: './food.jpg' },
-  { id: 2, name: 'Veg Extravaganza Pizza', price: 'Rs. 450', image: 'path/to/image2.jpg' },
+  { id: 2, name: 'Veg Extravaganza Pizza', price: 'Rs. 450', image: './food.jpg' },
+  { id: 1, name: 'Corn Pizza', price: 'Rs. 180', image: './food.jpg' },
+  { id: 2, name: 'Veg Extravaganza Pizza', price: 'Rs. 450', image: './food.jpg' },
   // Add more menu items as needed
 ];
 

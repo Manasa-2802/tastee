@@ -11,6 +11,8 @@ import Menu1 from './components/menu1';
 import Cart from './components/cart';
 import FoodDeliveryApp from './components/landing';
 import About from './components/about';
+import Payment from './components/payment';
+import Forgot from './components/forgotpass';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path="/menu1" element={<Menu1 />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<About />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/forgotpass" element={<Forgot />} />
           </Routes>
         </div>
       </Router>

@@ -10,10 +10,20 @@ function Register() {
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Initialize useNavigate
 
+  // Function to check password strength
+  const isStrongPassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       setError('Passwords do not match');
+      return;
+    }
+    if (!isStrongPassword(password)) {
+      setError('Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.');
       return;
     }
     setError('');
@@ -81,8 +91,7 @@ function Register() {
           <button 
             type="submit" 
             className="btn btn-success w-100">
-               <Link to="/login" className="text-muted">Register</Link>
-         
+            Register
           </button>
         </form>
       </div>
