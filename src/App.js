@@ -13,6 +13,11 @@ import FoodDeliveryApp from './components/landing';
 import About from './components/about';
 import Payment from './components/payment';
 import Forgot from './components/forgotpass';
+import Dashboard from './admin/dashboard';
+import Dashboardd from './admin/dash';
+
+// import Category from './admin/category';
+// import ManageCat from './admin/managecat';
 
 function App() {
   return (
@@ -31,7 +36,14 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/forgotpass" element={<Forgot />} />
-          </Routes>
+            <Route path="/admin/dashboard" element={<Dashboard/>} />
+            <Route path="/admin/dash" element={<Dashboardd/>} />
+            
+            {/* <Route path="/admin/category" element={<Category />} /> */}
+           {/* <Route path="/admin/managecat" element={<ManageCat />} /> */}
+             
+{/* <Route path="/managecat" element={<ManageCat />} />          */}
+  </Routes>
         </div>
       </Router>
     </CartProvider>

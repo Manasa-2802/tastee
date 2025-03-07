@@ -29,7 +29,7 @@ function Login() {
     const userRole = checkUserRole(email, password, role);
 
     if (userRole === 'admin') {
-      navigate('/admin'); // Redirect to admin page
+      navigate('/admin/dashboard'); // Redirect to admin page
     } else if (userRole === 'user') {
       navigate('/landing'); // Redirect to landing page
     } else {
