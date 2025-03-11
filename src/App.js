@@ -6,7 +6,7 @@ import Register from './components/register';
 import Login from './components/login';
 import Menu from './components/menu';
 import Review from './components/review';
-import Pizza from './components/pizza';
+import Pizza from './components/pizzaa';
 import Menu1 from './components/menu1';
 import Cart from './components/cart';
 import FoodDeliveryApp from './components/landing';
@@ -19,6 +19,18 @@ import Category from './admin/category';
 import CategoryManager from './admin/managecat';
 import User from './admin/user';
 import Burger from './components/burger';
+import Chicken from './components/chicken';
+// import Burger from './components/burger';
+import Meal from './components/meals';
+import Dosa from './components/dosa';
+import Paneer from './components/paneer';
+import Mush from './components/mush';
+import Roti from './components/roti';
+
+import Dessert from './components/dessert';
+
+
+
 
 
 // import Category from './admin/category';
@@ -35,7 +47,7 @@ function App() {
             <Route path="/landing" element={<FoodDeliveryApp />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/review" element={<Review />} />
-            <Route path="/pizza" element={<Pizza />} />
+            <Route path="/pizzaa" element={<Pizza />} />
             <Route path="/menu1" element={<Menu1 />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<About />} />
@@ -47,8 +59,13 @@ function App() {
             <Route path="/admin/managecat" element={<CategoryManager />} />
             <Route path="/admin/userlist" element={<User />} />
             <Route path="/burger" element={<Burger />} />
-      
-
+            <Route path ="/chicken" element={<Chicken/>}/>
+            <Route path ="/meals" element={<Meal/>}/>
+            <Route path ="/dosa" element={<Dosa/>}/>
+            <Route path ="/paneer" element={<Paneer/>}/>
+            <Route path ="/mush" element={<Mush/>}/>
+            <Route path ="/roti" element={<Roti/>}/>
+            <Route path ="/dessert" element={<Dessert/>}/>
             
             {/* <Route path="/admin/category" element={<Category />} /> */}
            {/* <Route path="/admin/managecat" element={<ManageCat />} /> */}

@@ -28,7 +28,7 @@ function App() {
       name: 'Pizza',
       image: './pizaa.jpg',
       description: 'A classic pizza with tomato sauce, mozzarella, and basil.',
-      path : '/pizza'
+      path : '/pizzaa'
       // price: '$12.99'
     },
     {
@@ -36,6 +36,7 @@ function App() {
       name: 'Chicken',
       image: './chicken.jpg', // Placeholder for Chicken image
       description: 'Tender and juicy chicken dishes.',
+      path : '/chicken'
       // price: '$12.99'
     },
     {
@@ -43,6 +44,7 @@ function App() {
       name: 'Meals',
       image: './meals.jpg', // Placeholder for Meals image
       description: 'A variety of complete meals.',
+      path : '/meals'
       // price: '$12.99'
     },
     {
@@ -50,6 +52,7 @@ function App() {
       name: 'Dosa',
       image: './dosa.jpg',
       description: 'Variety of Dosa from all over the place',
+      path : '/dosa'
       // price: '$12.99'
     },
     {
@@ -57,6 +60,7 @@ function App() {
       name: 'Paneer Plaza',
       image: './panner.jpg',
       description: 'Explore the world of paneer.',
+      path :'/paneer'
       // price: '$12.99'
     },
     {
@@ -64,21 +68,22 @@ function App() {
       name: 'Mushroommm...',
       image: './mushroom.jpg',
       description: 'A room with no door that serves our tongue with a rich flavour',
-      // price: '$12.99'
+      path :'/mush'  // price: '$12.99'
     },
-    {
-      id: 8,
-      name: 'Non-Veg Section',
-      image: './chicken.jpg',
-      description: 'Mouth Watering variety of dishes',
+    // {
+    //   id: 8,
+    //   name: 'Non-Veg Section',
+    //   image: './chicken.jpg',
+    //   description: 'Mouth Watering variety of dishes',
 
-      // price: '$12.99'
-    },
+    //   // price: '$12.99'
+    // },
     {
       id: 9,
       name: 'Roti',
       image: './roti.jpg',
       description: 'Roties are must',
+      path : '/roti'
       // price: '$12.99'
     },
     {
@@ -86,6 +91,7 @@ function App() {
       name: 'Desserts',
       image: './ice.jpg',
       description: 'A must thing after a meal',
+      path : '/dessert'
       // price: '$12.99'
     },
     {
