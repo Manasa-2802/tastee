@@ -1,10 +1,26 @@
-import React from 'react';
-import { ChefHat, Clock, Star, Truck, ShoppingCart, User } from 'lucide-react'; 
-import { Link } from 'react-router-dom'; // Import necessary icons
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap
+import React, { useState } from 'react';
+import { ChefHat, Clock, Star, Truck, ShoppingCart, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/landing.css';
 
 function App() {
+  const [user, setUser] = useState({
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    isLoggedIn: true,
+  });
+
+  const navigate = useNavigate();
+
+  const handleUserClick = () => {
+    if (user.isLoggedIn) {
+      navigate('/user-details');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <div>
       {/* Navigation */}
@@ -44,10 +60,10 @@ function App() {
 
           {/* Icons on the right side */}
           <div className="d-flex align-items-center">
-            <a href="#" className="me-3">
+            <Link to="/cart" className="me-3">
               <ShoppingCart size={24} />
-            </a>
-            <a href="#">
+            </Link>
+            <a href="#" onClick={handleUserClick} className="me-3">
               <User size={24} />
             </a>
           </div>
@@ -67,36 +83,6 @@ function App() {
           </button>
         </div>
       </section>
-
-      {/* Featured Dishes */}
-      <div className="bg-light py-5">
-        <div className="container">
-          <h2 className="text-center mb-4">Popular Dishes</h2>
-          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="col">
-                <div className="card shadow-sm">
-                  <img
-                    className="card-img-top"
-                    src={`https://images.unsplash.com/photo-151${5543543000 + item}?auto=format&fit=crop&q=80`}
-                    alt="Food"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Special Dish {item}</h5>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <span className="text-orange-500 fw-bold">$12.99</span>
-                      <button type="submit" className="btn btn-primary">
-                        <Link to="/menu1" className="text-white">View Items</Link>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Features Section */}
       <section className="py-5">
@@ -151,11 +137,48 @@ function App() {
       <footer className="bg-dark text-light py-4">
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12 text-center">
               <h5>TasteQuest</h5>
               <p>Delivering happiness to your doorstep</p>
             </div>
-            <div className="col-md-6 text-md-end">
+          </div>
+          <div className="row">
+            <div className="col-md-3">
+              <h5>Quick Links</h5>
+              <ul className="list-unstyled">
+                <li><Link to="/landing" className="text-light">Home</Link></li>
+                <li><Link to="/menu" className="text-light">Menu</Link></li>
+                <li><Link to="/about" className="text-light">About Us</Link></li>
+                <li><Link to="/review" className="text-light">Reviews</Link></li>
+              </ul>
+            </div>
+            <div className="col-md-3">
+              <h5>Navigation</h5>
+              <ul className="list-unstyled">
+                <li><Link to="/menu" className="text-light">Menu</Link></li>
+                <li><Link to="/cart" className="text-light">Cart</Link></li>
+                <li><Link to="/review" className="text-light">Reviews</Link></li>
+              </ul>
+            </div>
+            <div className="col-md-3">
+              <h5>Contact Us</h5>
+              <p>
+                Phone: <a href="tel:+1234567890" className="text-light">+123 456 7890</a><br />
+                Email: <a href="mailto:info@tastequest.com" className="text-light">info@tastequest.com</a>
+              </p>
+            </div>
+            <div className="col-md-3">
+              <h5>Follow Us</h5>
+              <ul className="list-unstyled">
+                <li><a href="https://facebook.com" className="text-light">Facebook</a></li>
+                <li><a href="https://twitter.com" className="text-light">Twitter</a></li>
+                <li><a href="https://instagram.com" className="text-light">Instagram</a></li>
+                <li><a href="https://linkedin.com" className="text-light">LinkedIn</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="row mt-4">
+            <div className="col-md-12 text-center">
               <p>© 2025 TasteQuest. All rights reserved.</p>
             </div>
           </div>

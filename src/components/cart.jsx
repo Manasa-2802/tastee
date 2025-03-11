@@ -20,7 +20,7 @@ const Cart = () => {
       {cartItems.length === 0 ? (
         <div className="text-center">
           <p>Your cart is empty.</p>
-          <Link to="/menu1" className="btn btn-primary">
+          <Link to="/menu" className="btn btn-primary">
             Back to Menu
           </Link>
         </div>
@@ -63,7 +63,7 @@ const Cart = () => {
             <button className="btn btn-success" onClick={handleProceedToPayment}>
               Proceed to Payment
             </button>
-            <Link to="/menu1" className="btn btn-primary">
+            <Link to="/menu" className="btn btn-primary">
               Back to Menu
             </Link>
           </div>

@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import 'bootstrap/dist/css/bootstrap.min.css';  // Import Bootstrap
+import { Card } from 'react-bootstrap';
 
 function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [address, setAddress] = useState(''); // Added state for address
+  const [gender, setGender] = useState(''); // Added state for gender
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Initialize useNavigate
 
@@ -28,7 +31,7 @@ function Register() {
     }
     setError('');
     // Handle registration logic here, like sending data to a server
-    console.log('Registering with', { username, email, password });
+    console.log('Registering with', { username, email, password, address, gender });
 
     // Redirect to the login page after successful registration
     navigate('/login');
@@ -36,8 +39,8 @@ function Register() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4 shadow-sm" style={{ maxWidth: '400px' }}>
-        <h2 className="text-center mb-4 text-primary">Create Account</h2> {/* Blue heading using Bootstrap's text-primary class */}
+      <div className="card p-4 shadow-sm" style={{ maxWidth: '600px', width: '100%' }}> {/* Increased maxWidth and set width to 100% */}
+        <h2 className="text-center mb-4 text-primary">Create Account</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">Username</label>
@@ -87,7 +90,34 @@ function Register() {
               required
             />
           </div>
-          {error && <div className="alert alert-danger">{error}</div>} {/* Bootstrap alert for error message */}
+          <div className="mb-3">
+            <label htmlFor="address" className="form-label">Address</label>
+            <input
+              type="text"
+              id="address"
+              className="form-control"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Enter your address"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="gender" className="form-label">Gender</label>
+            <select
+              id="gender"
+              className="form-control"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          {error && <div className="alert alert-danger">{error}</div>}
           <button 
             type="submit" 
             className="btn btn-success w-100">
