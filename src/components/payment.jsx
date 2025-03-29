@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { CreditCard, Wallet, Truck, CheckCircle2 } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Receipt from './receipt'; // Import the Receipt component
 
-function App() {
+function Payment() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const totalAmount = location.state?.totalAmount || 0;
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [cardType, setCardType] = useState('credit');
   const [upiType, setUpiType] = useState('gpay'); // Default UPI type
@@ -12,15 +17,14 @@ function App() {
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [upiId, setUpiId] = useState('');
-  const [amount, setAmount] = useState(''); // Centralized amount state
-  const [amountSet, setAmountSet] = useState(false); // Track if amount has been set
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsProcessing(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsProcessing(false);
     setIsSuccess(true);
+    navigate('/receipt', { state: { orderId: Math.random().toString(36).substr(2, 9), items: location.state.cartItems, totalAmount: totalAmount } });
   };
 
   const handleUpiTypeChange = (e) => {
@@ -43,29 +47,9 @@ function App() {
     }
   };
 
-  const handleAmountChange = (e) => {
-    if (!amountSet) {
-      setAmount(e.target.value);
-    }
-  };
-
-  const handleAmountSet = () => {
-    setAmountSet(true);
-  };
-
   if (isSuccess) {
     return (
-      <div className="d-flex vh-100 justify-content-center align-items-center bg-light">
-        <div className="card text-center p-4 shadow">
-          <CheckCircle2
-            className="text-success display-4 mb-3"
-            style={{ color: 'green', fontWeight: 'bold', fontSize: '4rem' }}
-          />
-          <h2 className="fw-bold">Payment Successful!</h2>
-          <p>Your order has been processed. A confirmation email will be sent shortly.</p>
-          <div className="alert alert-success">Order ID: #{Math.random().toString(36).substr(2, 9)}</div>
-        </div>
-      </div>
+      <Receipt orderDetails={{ orderId: '12345', items: location.state.cartItems, totalAmount: totalAmount }} />
     );
   }
 
@@ -165,19 +149,18 @@ function App() {
           <input
             type="number"
             className="form-control"
-            value={amount}
-            onChange={handleAmountChange}
-            disabled={amountSet}
+            value={totalAmount}
             required
+            disabled
           />
         </div>
 
-        <button type="submit" className="btn btn-primary w-100 mt-3" disabled={isProcessing || !amount}>
-          {isProcessing ? 'Processing...' : `Pay ${paymentMethod === 'cod' ? '(Cash on Delivery)' : 'Now'}`}
+        <button type="submit" className="btn btn-primary w-100 mt-3" disabled={isProcessing}>
+          {isProcessing ? 'Processing...' : `Pay Now`}
         </button>
       </div>
     </div>
   );
 }
 
-export default App;
+export default Payment;

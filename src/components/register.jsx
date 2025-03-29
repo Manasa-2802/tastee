@@ -1,49 +1,80 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
-import 'bootstrap/dist/css/bootstrap.min.css';  // Import Bootstrap
-import { Card } from 'react-bootstrap';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap
+import { Card } from "react-bootstrap";
+import axios from "axios"; // Use ES6 import syntax
 
 function Register() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [address, setAddress] = useState(''); // Added state for address
-  const [gender, setGender] = useState(''); // Added state for gender
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [address, setAddress] = useState(""); // Added state for address
+  const [gender, setGender] = useState(""); // Added state for gender
+  const [error, setError] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate
 
   // Function to check password strength
   const isStrongPassword = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
     if (!isStrongPassword(password)) {
-      setError('Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.');
+      setError(
+        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character."
+      );
       return;
     }
-    setError('');
+    setError("");
     // Handle registration logic here, like sending data to a server
-    console.log('Registering with', { username, email, password, address, gender });
+    console.log("Registering with", {
+      username,
+      email,
+      password,
+      address,
+      gender,
+    });
 
-    // Redirect to the login page after successful registration
-    navigate('/login');
+    axios
+      .post("http://localhost:5000/register", {
+        username,
+        email,
+        password,
+        address,
+        gender,
+      })
+      .then(function (response) {
+        console.log(response);
+        // Redirect to the login page after successful registration
+        navigate("/login");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4 shadow-sm" style={{ maxWidth: '600px', width: '100%' }}> {/* Increased maxWidth and set width to 100% */}
+      <div
+        className="card p-4 shadow-sm"
+        style={{ maxWidth: "600px", width: "100%" }}
+      >
+        {" "}
+        {/* Increased maxWidth and set width to 100% */}
         <h2 className="text-center mb-4 text-primary">Create Account</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
             <input
               type="text"
               id="username"
@@ -55,7 +86,9 @@ function Register() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email</label>
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -67,7 +100,9 @@ function Register() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -79,7 +114,9 @@ function Register() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+            <label htmlFor="confirmPassword" className="form-label">
+              Confirm Password
+            </label>
             <input
               type="password"
               id="confirmPassword"
@@ -91,7 +128,9 @@ function Register() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="address" className="form-label">Address</label>
+            <label htmlFor="address" className="form-label">
+              Address
+            </label>
             <input
               type="text"
               id="address"
@@ -103,7 +142,9 @@ function Register() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="gender" className="form-label">Gender</label>
+            <label htmlFor="gender" className="form-label">
+              Gender
+            </label>
             <select
               id="gender"
               className="form-control"
@@ -118,9 +159,7 @@ function Register() {
             </select>
           </div>
           {error && <div className="alert alert-danger">{error}</div>}
-          <button 
-            type="submit" 
-            className="btn btn-success w-100">
+          <button type="submit" className="btn btn-success w-100">
             Register
           </button>
         </form>

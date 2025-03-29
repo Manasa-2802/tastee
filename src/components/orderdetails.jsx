@@ -1,0 +1,1 @@
+navigate('/receipt', { state: { orderId: Math.random().toString(36).substr(2, 9), items: location.state.cartItems, totalAmount: totalAmount } });

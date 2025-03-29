@@ -43,6 +43,7 @@ function Login() {
     if (email === 'admin@gmail.com' && password === 'Admin$123' && role === 'admin') {
       return 'admin';
     } else if (role === 'user') {
+      
       // For user role, allow any password
       return 'user';
     }
