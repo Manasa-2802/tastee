@@ -1,36 +1,43 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 
-const Receipt = () => {
-  const location = useLocation();
-  const { cartItems, totalAmount } = location.state || {};
+function Receipt({ orderDetails }) {
+  if (!orderDetails) {
+    return <div>Loading...</div>;
+  }
+
+  const { orderId, items, totalAmount, paymentMethod, address } = orderDetails;
 
   return (
     <div className="container mt-5">
-      <div className="card">
-        <div className="card-body">
-          <h2 className="text-center mb-4">Receipt</h2>
-          <ul className="list-group">
-            {cartItems.map((item, index) => (
-              <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <strong>{item.name}</strong>
-                  <p className="mb-0">Quantity: {item.quantity}</p>
-                </div>
-                <span className="badge badge-primary badge-pill">Rs. {parseFloat(item.price.slice(4)) * item.quantity}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="d-flex justify-content-between mt-3">
-            <h4>Total Amount: Rs. {totalAmount}</h4>
-          </div>
-          <div className="text-center mt-3">
-            <button className="btn btn-primary">Print Receipt</button>
-          </div>
-        </div>
+      <h2 className="mb-4">Receipt</h2>
+      <div className="mb-3">
+        <label className="form-label">Order ID</label>
+        <input type="text" className="form-control" value={orderId} readOnly />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Items</label>
+        <ul className="list-group">
+          {items.map((item, index) => (
+            <li key={index} className="list-group-item">
+              {item.name} - Quantity: {item.quantity}, Amount: Rs. {item.price}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Total Amount</label>
+        <input type="text" className="form-control" value={`Rs. ${totalAmount}`} readOnly />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Payment Method</label>
+        <input type="text" className="form-control" value={paymentMethod} readOnly />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Address</label>
+        <textarea className="form-control" rows="4" value={address} readOnly />
       </div>
     </div>
   );
-};
+}
 
 export default Receipt;

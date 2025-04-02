@@ -11,7 +11,7 @@ const Cart = () => {
   };
 
   const handleProceedToPayment = () => {
-    navigate('/payment', { state: { totalAmount: getTotalAmount() } });
+    navigate('/payment', { state: { totalAmount: getTotalAmount(), cartItems: cartItems } });
   };
 
   return (
