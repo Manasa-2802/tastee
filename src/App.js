@@ -27,6 +27,7 @@ import Paneer from './components/paneer';
 import Mush from './components/mush';
 import Roti from './components/roti';
 import Receipt from './components/receipt';
+import UserDetails from './components/user_det';
 
 import Dessert from './components/dessert';
 
@@ -68,6 +69,7 @@ function App() {
             <Route path ="/roti" element={<Roti/>}/>
             <Route path ="/dessert" element={<Dessert/>}/>
             <Route path="/receipt" element={<Receipt />} />
+            <Route path="/user_det" element={<UserDetails />} />
             
             {/* <Route path="/admin/category" element={<Category />} /> */}
            {/* <Route path="/admin/managecat" element={<ManageCat />} /> */}

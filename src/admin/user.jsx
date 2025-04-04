@@ -94,7 +94,7 @@ const UserManager = () => {
             <Card.Body>
               <Table striped bordered hover>
                 <thead>
-                  <tr>
+                  <tr>   
                     <th>#</th>
                     <th>Profile Pic</th>
                     <th>Name</th>

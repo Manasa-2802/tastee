@@ -8,7 +8,8 @@ function App() {
   const categories = [
     { name: 'Burgers', icon: '🍔' },
     { name: 'Pizza', icon: '🍕' },
-    { name: 'Chicken', icon: '🐔' }, // Replaced "Sushi" with "Chicken"
+    { name: 'Chicken', icon: '🍗' }, // Replaced "Sushi" with "Chicken"
+    // { name: 'Chicken', icon: 'z' }, // Replaced "Sushi" with "Chicken"
     { name: 'Meals', icon: '🍽️' }, // Replaced "Salads" with "Meals"
     { name: 'Desserts', icon: '🍰' },
     { name: 'Drinks', icon: '🥤' }

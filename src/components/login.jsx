@@ -52,6 +52,7 @@ function Login() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+
   };
 
   const isStrongPassword = (password) => {
