@@ -46,9 +46,39 @@ function Payment() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const validateAddressDetails = () => {
+    const newErrors = {};
+    const pincodeRegex = /^\d{6}$/; // 6-digit number
+    const streetRegex = /^[a-zA-Z0-9\s#]*$/; // Only characters, numbers, spaces, and the # symbol
+    const houseNumberRegex = /^\d+$/; // Only numbers
+    const cityRegex = /^[a-zA-Z\s]+$/; // Only characters and spaces
+
+    if (!pincodeRegex.test(pincode)) {
+      newErrors.pincode = 'Invalid pincode. Please enter a 6-digit number.';
+    }
+
+    if (!streetRegex.test(street)) {
+      newErrors.street = 'Invalid street. Only characters, numbers, spaces, and the # symbol are allowed.';
+    }
+
+    if (!houseNumberRegex.test(houseNumber)) {
+      newErrors.houseNumber = 'Invalid house number. Only numbers are allowed.';
+    }
+
+    if (!cityRegex.test(city)) {
+      newErrors.city = 'Invalid city. Only characters and spaces are allowed.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (paymentMethod === 'card' && !validateCardDetails()) {
+      return;
+    }
+    if (!validateAddressDetails()) {
       return;
     }
 
@@ -96,18 +126,46 @@ function Payment() {
             <div className="mb-3">
               <label className="form-label">Street</label>
               <input type="text" className="form-control" value={street} onChange={(e) => setStreet(e.target.value)} required />
+              {errors.street && <div className="text-danger">{errors.street}</div>}
             </div>
             <div className="mb-3">
               <label className="form-label">House Number</label>
               <input type="text" className="form-control" value={houseNumber} onChange={(e) => setHouseNumber(e.target.value)} required />
+              {errors.houseNumber && <div className="text-danger">{errors.houseNumber}</div>}
             </div>
             <div className="mb-3">
               <label className="form-label">City</label>
-              <input type="text" className="form-control" value={city} onChange={(e) => setCity(e.target.value)} required />
+              <select
+                className="form-select"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required
+              >
+                <option value="">Select City</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Mysore">Mysore</option>
+                <option value="Tumakuru">Tumakuru</option>
+                <option value="Hassan">Hassan</option>
+                <option value="Mandya">Mandya</option>
+              </select>
+              {errors.city && <div className="text-danger">{errors.city}</div>}
             </div>
             <div className="mb-3">
               <label className="form-label">Pincode</label>
-              <input type="text" className="form-control" value={pincode} onChange={(e) => setPincode(e.target.value)} required />
+              <input
+                type="text"
+                className="form-control"
+                value={pincode}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d*$/.test(value)) {
+                    setPincode(value);
+                  }
+                }}
+                required
+                maxLength={6}
+              />
+              {errors.pincode && <div className="text-danger">{errors.pincode}</div>}
             </div>
             <div className="mb-3">
               <label className="form-label">State</label>

@@ -1,58 +1,56 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [role, setRole] = useState(''); // State for the selected role
   const [passwordStrength, setPasswordStrength] = useState(''); // State for password strength feedback
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [isLoading, setIsLoading] = useState(false); // State for loading
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!email || !password || !role) {
-      setError('Please fill in all fields');
-      return;
-    }
     setError('');
+    setIsLoading(true);
 
     // Password strength validation for non-admin users
     if (role !== 'admin' && !isStrongPassword(password)) {
       setError('Password is not strong enough');
+      setIsLoading(false);
       return;
     }
 
-    // Simulate role check (you should replace this with your actual authentication logic)
-    const userRole = checkUserRole(email, password, role);
-
-    if (userRole === 'admin') {
-      navigate('/admin/dashboard'); // Redirect to admin page
-    } else if (userRole === 'user') {
-      navigate('/landing'); // Redirect to landing page
-    } else {
-      setError('Invalid credentials');
+    try {
+      const response = await axios.post('http://localhost:5000/login', {
+        username,
+        password,
+        role,
+      });
+      console.log(response);
+      if (response.data.message === 'Login successful!') {
+        if (role === 'admin') {
+          navigate('/admin/dashboard'); // Redirect to admin page
+        } else if (role === 'user') {
+          navigate('/landing'); // Redirect to landing page
+        }
+      } else {
+        setError(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      setError(error.response?.data?.message || 'An error occurred');
+    } finally {
+      setIsLoading(false);
     }
-  };
-
-  // Simulate role check function (replace with your actual logic)
-  const checkUserRole = (email, password, role) => {
-    // Example: Check if the email is 'admin@example.com' and password is 'admin' for admin role
-    if (email === 'admin@gmail.com' && password === 'Admin$123' && role === 'admin') {
-      return 'admin';
-    } else if (role === 'user') {
-      
-      // For user role, allow any password
-      return 'user';
-    }
-    return null; // Invalid credentials
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-
   };
 
   const isStrongPassword = (password) => {
@@ -84,18 +82,18 @@ function Login() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4 shadow-sm" style={{ width: '400px', height: '500px' }}> {/* Set width and height */}
+      <div className="card p-4 shadow-sm" style={{ maxWidth: '600px', width: '100%' }}>
         <h2 className="text-center mb-4 text-primary">Login</h2>
         <form onSubmit={handleSubmit} style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email</label>
+            <label htmlFor="username" className="form-label">Username</label>
             <input
-              type="email"
-              id="email"
+              type="text"
+              id="username"
               className="form-control"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
               required
             />
           </div>
@@ -146,8 +144,8 @@ function Login() {
             </select>
           </div>
           {error && <div className="alert alert-danger">{error}</div>}
-          <button type="submit" className="btn btn-success w-100">
-            Login
+          <button type="submit" className="btn btn-success w-100" disabled={isLoading}>
+            {isLoading ? 'Logging in...' : 'Login'}
           </button>
           <div className="text-center mt-3">
             <Link to="/register" className="text-muted">Don't have an account? Register</Link>
