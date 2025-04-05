@@ -118,7 +118,8 @@ function Payment() {
               <Truck className="me-2" /> COD
             </button>
           </div>
-        </div>
+        </div
+        
 
         {paymentMethod && (
           <form onSubmit={handleSubmit}>
