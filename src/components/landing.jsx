@@ -1,24 +1,19 @@
-// import React, { useState } from 'react';
-// import { ChefHat, Clock, Star, Truck, ShoppingCart, User } from 'lucide-react';
+
+
+
+// // LandingPage.js
+// import React from 'react';
 // import { Link, useNavigate } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import './css/landing.css';
+// import { ChefHat, Clock, Star, Truck, ShoppingCart, User } from 'lucide-react';
 
-// function App() {
-//   const [user, setUser] = useState({
-//     name: 'John Doe',
-//     email: 'john.doe@example.com',
-//     isLoggedIn: true,
-//   });
-
+// const LandingPage = () => {
 //   const navigate = useNavigate();
 
 //   const handleUserClick = () => {
-//     if (user.isLoggedIn) {
-//       navigate('/user-details');
-//     } else {
-//       navigate('/login');
-//     }
+//     // Implement your user click logic here
+//     navigate('/user-details');
 //   };
 
 //   return (
@@ -63,7 +58,7 @@
 //             <Link to="/cart" className="me-3">
 //               <ShoppingCart size={24} />
 //             </Link>
-//             <a href="#" onClick={handleUserClick} className="me-3">
+//             <a href="/user_det" onClick={handleUserClick} className="me-3">
 //               <User size={24} />
 //             </a>
 //           </div>
@@ -173,7 +168,6 @@
 //                 <li><a href="https://facebook.com" className="text-light">Facebook</a></li>
 //                 <li><a href="https://twitter.com" className="text-light">Twitter</a></li>
 //                 <li><a href="https://instagram.com" className="text-light">Instagram</a></li>
-//                 {/* <li><a href="https://linkedin.com" className="text-light">LinkedIn</a></li> */}
 //               </ul>
 //             </div>
 //           </div>
@@ -186,13 +180,10 @@
 //       </footer>
 //     </div>
 //   );
-// }
+// };
 
-// export default App;
+// export default LandingPage;
 
-
-
-// LandingPage.js
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -203,7 +194,6 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleUserClick = () => {
-    // Implement your user click logic here
     navigate('/user-details');
   };
 

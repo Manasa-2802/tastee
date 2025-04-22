@@ -118,7 +118,7 @@ function Payment() {
               <Truck className="me-2" /> COD
             </button>
           </div>
-        </div
+        </div>
         
 
         {paymentMethod && (
@@ -145,7 +145,7 @@ function Payment() {
                 <option value="">Select City</option>
                 <option value="Bangalore">Bangalore</option>
                 <option value="Mysore">Mysore</option>
-                <option value="Tumakuru">Tumakuru</option>
+                <option value="Tumkur">Tumkur</option>
                 <option value="Hassan">Hassan</option>
                 <option value="Mandya">Mandya</option>
               </select>

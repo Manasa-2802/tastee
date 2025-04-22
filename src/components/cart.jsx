@@ -60,12 +60,12 @@ const Cart = () => {
           </table>
           <h3 className="mt-4">Total Amount: Rs. {getTotalAmount()}</h3>
           <div className="d-flex justify-content-between mt-4">
-            <button className="btn btn-success" onClick={handleProceedToPayment}>
-              Proceed to Payment
-            </button>
             <Link to="/menu" className="btn btn-primary">
               Back to Menu
             </Link>
+            <button className="btn btn-success" onClick={handleProceedToPayment}>
+              Proceed to Payment
+            </button>
           </div>
         </div>
       )}
