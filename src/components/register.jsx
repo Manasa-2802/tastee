@@ -170,7 +170,6 @@
 
 // export default Register;
 
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -207,21 +206,23 @@ function App() {
     }
     setError('');
     try {
-      const response = await axios.post('http://localhost:5000/register', {
-         username,
-         email,
-         password,
-         address,
-         gender,
-       });
+      const response = await axios.post(
+        'http://localhost:5000/api/users/register',
+        {
+          username,
+          email,
+          password,
+          address,
+          gender,
+        }
+      );
       console.log(response);
-      if (response.data.message === 'User registered successfully!') {
-         navigate('/login');
-      }
-      else {
+      if (response.status === 201) {
+        navigate('/');
+      } else {
         setError(response.data.message);
       }
-   } catch (error) {
+    } catch (error) {
       console.log(error);
       setError(error.response.data.message);
     }
@@ -229,7 +230,10 @@ function App() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4 shadow-sm" style={{ maxWidth: "600px", width: "100%" }}>
+      <div
+        className="card p-4 shadow-sm"
+        style={{ maxWidth: '600px', width: '100%' }}
+      >
         <h2 className="text-center mb-4 text-primary">Create Account</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -321,7 +325,7 @@ function App() {
           </div>
           {error && <div className="alert alert-danger">{error}</div>}
           <button type="submit" className="btn btn-success w-100">
-            <Link to="/" className="text-muted">Register</Link>
+            Register
           </button>
         </form>
       </div>

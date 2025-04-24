@@ -18,26 +18,21 @@ function Login() {
     setError('');
     setIsLoading(true);
 
-    // Password strength validation for non-admin users
-    if (role !== 'admin' && !isStrongPassword(password)) {
-      setError('Password is not strong enough');
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      const response = await axios.post('http://localhost:5000/login', {
-        username,
-        password,
-        role,
-      });
-      console.log(response);
-      if (response.data.message === 'Login successful!') {
-        if (role === 'admin') {
-          navigate('/admin/dashboard'); // Redirect to admin page
-        } else if (role === 'user') {
-          navigate('/landing'); // Redirect to landing page
+      const response = await axios.post(
+        'http://localhost:5000/api/users/login',
+        {
+          username,
+          password,
         }
+      );
+
+      if (response.data.message === 'Login successful') {
+        // Save user and token to localStorage
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+
+        navigate('/landing'); // Redirect to landing/dashboard
       } else {
         setError(response.data.message);
       }
@@ -82,11 +77,24 @@ function Login() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4 shadow-sm" style={{ maxWidth: '600px', width: '100%' }}>
+      <div
+        className="card p-4 shadow-sm"
+        style={{ maxWidth: '600px', width: '100%' }}
+      >
         <h2 className="text-center mb-4 text-primary">Login</h2>
-        <form onSubmit={handleSubmit} style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
           <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
             <input
               type="text"
               id="username"
@@ -98,9 +106,11 @@ function Login() {
             />
           </div>
           <div className="mb-3 position-relative">
-            <label htmlFor="password" className="form-label">Password</label>
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
             <input
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               id="password"
               className="form-control"
               value={password}
@@ -114,23 +124,33 @@ function Login() {
               style={{ cursor: 'pointer' }}
             >
               {showPassword ? (
-                <i className="bi bi-eye-slash" style={{ fontSize: '1.5rem' }}></i>
+                <i
+                  className="bi bi-eye-slash"
+                  style={{ fontSize: '1.5rem' }}
+                ></i>
               ) : (
                 <i className="bi bi-eye" style={{ fontSize: '1.5rem' }}></i>
               )}
             </span>
             <small className="form-text text-muted">
-              Password must be at least 8 characters long and include uppercase and lowercase letters, numbers, and special characters.
+              Password must be at least 8 characters long and include uppercase
+              and lowercase letters, numbers, and special characters.
             </small>
             <div className="mt-2">
               <strong>Password Strength: </strong>
-              <span className={passwordStrength === 'Strong' ? 'text-success' : 'text-danger'}>
+              <span
+                className={
+                  passwordStrength === 'Strong' ? 'text-success' : 'text-danger'
+                }
+              >
                 {passwordStrength}
               </span>
             </div>
           </div>
           <div className="mb-3">
-            <label htmlFor="role" className="form-label">Role</label>
+            <label htmlFor="role" className="form-label">
+              Role
+            </label>
             <select
               id="role"
               className="form-select"
@@ -144,14 +164,22 @@ function Login() {
             </select>
           </div>
           {error && <div className="alert alert-danger">{error}</div>}
-          <button type="submit" className="btn btn-success w-100" disabled={isLoading}>
+          <button
+            type="submit"
+            className="btn btn-success w-100"
+            disabled={isLoading}
+          >
             {isLoading ? 'Logging in...' : 'Login'}
           </button>
           <div className="text-center mt-3">
-            <Link to="/register" className="text-muted">Don't have an account? Register</Link>
+            <Link to="/register" className="text-muted">
+              Don't have an account? Register
+            </Link>
           </div>
           <div className="text-center mt-3">
-            <Link to="/forgotpass" className="text-muted">Forgot Password?</Link>
+            <Link to="/forgotpass" className="text-muted">
+              Forgot Password?
+            </Link>
           </div>
         </form>
       </div>
